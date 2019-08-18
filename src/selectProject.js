@@ -2,9 +2,10 @@ import projectLogic from "./projectLogic";
 
 const selectProjectsDisplay = () => {
     const selectProjects = document.getElementById("selectProjects");
-    const option = document.createElement("option");
-
+    selectProjects.innerHTML = `<option>Choose Project</option>`;
+    
     projectLogic.projectsArr.forEach(element => {
+        const option = document.createElement("option");
         option.setAttribute("value", `${element.name}`);
         option.innerText = `${element.name}`;
         selectProjects.appendChild(option);
