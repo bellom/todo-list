@@ -1,5 +1,6 @@
 import project from "./project";
 import selectProjectsDisplay from "./selectProject";
+import todoItemLogic from "./todoItemLogic";
 
 const projectLogic = (() => {
     const projectsArr = [project("Default")];
@@ -9,20 +10,45 @@ const projectLogic = (() => {
             if (e.target.id === "addProjectBtn") {
                 add();
             } else if (e.target.id.substring(0, 10) === "delProject") {
-                const index = Number(e.target.id.slice(10));
-                projectsArr.splice(index, 1);
-                display();                
+                deleteProject(e);
+                display();                 
+                selectProjectsDisplay();
+            } else if (e.target.id === "showProjectFormBtn") {
+                const projectName = document.getElementById("projectName");
+                resetFormField(projectName);
+                document.getElementById("addProjectForm").style.display = "block";
+            } else if (e.target.id === "closeProjectForm") {
+                document.getElementById("addProjectForm").style.display = "none";
+            } else if (e.target.id.substring(0, 11) === "showProject") {
+                showProjectHeader(e);
+                todoItemLogic.showProjectOwnedTodo(filterProjectTodos(e));
             }
         })
+    }
+
+    const filterProjectTodos = (e) => {
+        return todoItemLogic.todoItemsArr.filter((todo) => todo.projectOwn === `${e.target.id.slice(11)}`);
+    }
+
+    const showProjectHeader = (e) => {
+        const todoListHeader = document.getElementById("todoListHeader");
+        todoListHeader.innerText = `Project: ${e.target.id.slice(11)}`;
+    }
+
+    const deleteProject = (e) => {
+        const index = Number(e.target.id.slice(10));
+        projectsArr.splice(index, 1);
     }
 
     const add = () => {
         const projectName = document.getElementById("projectName");
 
-        projectsArr.push(project(projectName.value));
-        resetFormField(projectName);
-        display();
-        selectProjectsDisplay();
+        if (projectName.value != "" && projectName.value != " ") {
+            projectsArr.push(project(projectName.value));
+            display();
+            selectProjectsDisplay();
+            document.getElementById("addProjectForm").style.display = "none";
+        }        
     }
 
     const resetFormField = (field) => {
@@ -34,7 +60,7 @@ const projectLogic = (() => {
         reset();
         projectsArr.forEach((project, index) => {
             projectList.innerHTML +=   `<a class="d-flex justify-content-between my-1 text-decoration-none" href="#">
-                                            <span class="my-auto" id="show${project.name}">${project.name}</span>
+                                            <span class="my-auto" id="showProject${project.name}">${project.name}</span>
                                             <span class="btn btn-sm btn-danger text-white" id="delProject${index}">Delete</span>
                                         </a>`
         });
