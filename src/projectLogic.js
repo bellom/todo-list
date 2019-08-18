@@ -1,4 +1,5 @@
 import project from "./project";
+import selectProjectsDisplay from "./selectProject";
 
 const projectLogic = (() => {
     const projectsArr = [project("Default")];
@@ -19,15 +20,21 @@ const projectLogic = (() => {
         const projectName = document.getElementById("projectName");
 
         projectsArr.push(project(projectName.value));
+        resetFormField(projectName);
         display();
+        selectProjectsDisplay();
+    }
+
+    const resetFormField = (field) => {
+        field.value = "";
     }
 
     const display = () => {
         const projectList = document.getElementById("projectList");
         reset();
         projectsArr.forEach((project, index) => {
-            projectList.innerHTML +=   `<a class="dropdown-item d-flex justify-content-between" href="#">
-                                            <span id=${project.name}>${project.name}</span>
+            projectList.innerHTML +=   `<a class="d-flex justify-content-between my-1 text-decoration-none" href="#">
+                                            <span class="my-auto" id="show${project.name}">${project.name}</span>
                                             <span class="btn btn-sm btn-danger text-white" id="delProject${index}">Delete</span>
                                         </a>`
         });
@@ -37,7 +44,7 @@ const projectLogic = (() => {
         projectList.innerHTML = "";
     }
 
-    return { btnClick, display }
+    return { btnClick, display, projectsArr }
 })();
 
 export default projectLogic;
