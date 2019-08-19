@@ -1,4 +1,6 @@
 import todoItem from "./todoItem";
+import deleteProject from "./projectLogic";
+
 
 
 const todoItemLogic = (() => {
@@ -30,9 +32,12 @@ const todoItemLogic = (() => {
                                                 <p class="col-5 my-auto"><strong>Date: </strong>${todoItemsArr[index].dueDate}</p>
                                                 <p class="col-5 my-auto"><strong>Description:</strong> ${todoItemsArr[index].description}</p>
                                                 <p class="col-5 my-auto"><strong>Priority Status:</strong> ${todoItemsArr[index].priority}</p>
-                                                <span class="btn btn-sm btn-danger text-white ml-3" id="delTodo${index}">Delete</span>
+                                                <span class="btn btn-sm btn-danger text-white ml-3" id="removeTodo${index}">Delete</span>
                                                 <span class="btn btn-sm btn-primary text-white" id="editTodo${index}">Edit</span>
                                             </div>`;
+            } else if (e.target.id.substring(0,10) === "removeTodo"){
+                deleteTodo(e);
+                display();
             }
         })
     }
@@ -51,6 +56,12 @@ const todoItemLogic = (() => {
             document.getElementById("addTodoForm").style.display = "none";
         }        
     }
+
+    const deleteTodo = (e) => {
+        const index = Number(e.target.id.slice(10));
+        todoItemsArr.splice(index, 1);
+    }
+
 
     const resetFormField = (field) => {
         field.value = "";

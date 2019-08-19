@@ -70,7 +70,7 @@ const projectLogic = (() => {
         projectList.innerHTML = "";
     }
 
-    return { btnClick, display, projectsArr }
+    return { btnClick, display, projectsArr}
 })();
 
 export default projectLogic;
