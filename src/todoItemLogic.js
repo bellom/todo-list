@@ -22,6 +22,17 @@ const todoItemLogic = (() => {
                 document.getElementById("addTodoForm").style.display = "block"; 
             } else if (e.target.id === "closeTodoForm") {
                 document.getElementById("addTodoForm").style.display = "none";                
+            } else if (e.target.id.substring(0,11) === "todoDetails"){
+                const todoDetails = document.getElementById(e.target.id);
+                const index = e.target.id.slice(11);
+                todoDetails.innerHTML =  `<div>
+                                                <h6 class="col my-auto font-weight-bold">${todoItemsArr[index].title}</h6>
+                                                <p class="col-5 my-auto"><strong>Date: </strong>${todoItemsArr[index].dueDate}</p>
+                                                <p class="col-5 my-auto"><strong>Description:</strong> ${todoItemsArr[index].description}</p>
+                                                <p class="col-5 my-auto"><strong>Priority Status:</strong> ${todoItemsArr[index].priority}</p>
+                                                <span class="btn btn-sm btn-danger text-white ml-3" id="delTodo${index}">Delete</span>
+                                                <span class="btn btn-sm btn-primary text-white" id="editTodo${index}">Edit</span>
+                                            </div>`;
             }
         })
     }
