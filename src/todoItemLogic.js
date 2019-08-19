@@ -5,7 +5,6 @@ import deleteProject from "./projectLogic";
 
 const todoItemLogic = (() => {
     const todoItemsArr = [];
-
     const btnClick = () => {
         document.addEventListener("click", function(e){
             if (e.target.id === "addTodoBtn") {
@@ -27,17 +26,41 @@ const todoItemLogic = (() => {
             } else if (e.target.id.substring(0,11) === "todoDetails"){
                 const todoDetails = document.getElementById(e.target.id);
                 const index = e.target.id.slice(11);
-                todoDetails.innerHTML =  `<div>
-                                                <h6 class="col my-auto font-weight-bold">${todoItemsArr[index].title}</h6>
-                                                <p class="col-5 my-auto"><strong>Date: </strong>${todoItemsArr[index].dueDate}</p>
-                                                <p class="col-5 my-auto"><strong>Description:</strong> ${todoItemsArr[index].description}</p>
-                                                <p class="col-5 my-auto"><strong>Priority Status:</strong> ${todoItemsArr[index].priority}</p>
-                                                <span class="btn btn-sm btn-danger text-white ml-3" id="removeTodo${index}">Delete</span>
-                                                <span class="btn btn-sm btn-primary text-white" id="editTodo${index}">Edit</span>
-                                            </div>`;
+                todoDetails.innerHTML = `<div>
+                                            <h6 class="col my-auto font-weight-bold viewTitle" id="viewTitle">${todoItemsArr[index].title}</h6>
+                                            <p class="col-5 my-auto viewDate"><strong>Date: </strong>${todoItemsArr[index].dueDate}</p>
+                                            <p class="col-5 my-auto viewDesc"><strong>Description:</strong> ${todoItemsArr[index].description}</p>
+                                            <p class="col-5 my-auto viewPriority"><strong>Priority Status:</strong> ${todoItemsArr[index].priority}</p>
+                                            <span class="btn btn-sm btn-danger text-white ml-3" id="removeTodo${index}">Delete</span>
+                                            <span class="btn btn-sm btn-primary text-white" id="editTodo${index}">Edit</span>
+                                            <div class="form-inline my-2 my-lg-0 ml-3" id="addEditForm">
+                                                <form>
+                                                    <input class="form-control mr-sm-2 mb-2 mt-3" value="${todoItemsArr[index].title}" id="editTitle" required>
+                                                    <input class="form-control mr-sm-2 mb-2 mt-3" value="${todoItemsArr[index].description}" id="editDesc" required>
+                                                    <input class="form-control mr-sm-2 mb-2" id="editdueDate" value="${todoItemsArr[index].dueDate}" type="date" required>
+                                                    <select class="custom-select mr-sm-2 mb-2" id="editPriority" value="${todoItemsArr[index].priority}" required>
+                                                        <option>Choose Priority</option>
+                                                        <option value="Low">Low</option>
+                                                        <option value="Medium">Medium</option>
+                                                        <option value="High">High</option>
+                                                    </select>
+                                                    <div role="group">                                    
+                                                        <button id="saveEditForm" class="btn btn-sm btn-primary mb-2">Save</button>
+                                                        <button type="button" id="closeEditForm" class="btn btn-sm btn-danger mb-2">Cancel</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>`;
+            document.getElementById("addEditForm").style.display = "none";
             } else if (e.target.id.substring(0,10) === "removeTodo"){
                 deleteTodo(e);
                 display();
+            } else if (e.target.id.substring(0,8) === "editTodo"){
+                document.getElementById("addEditForm").style.display = "block";
+            } else if (e.target.id === "saveEditForm"){
+                editTodo();
+            } else if (e.target.id === "closeEditForm"){
+                document.getElementById("addEditForm").style.display = "none";
             }
         })
     }
@@ -57,11 +80,27 @@ const todoItemLogic = (() => {
         }        
     }
 
+    const editTodo = () => {
+        const viewTitle = document.querySelector(".viewTitle");
+        const viewDesc = document.querySelector(".viewDesc");
+        const viewDate = document.querySelector(".viewDate");
+        const viewPriority = document.querySelector(".viewPriority");
+
+        const title = document.getElementById("editTitle").value;
+        const desc = document.getElementById("editDesc").value;
+        const dueDate = document.getElementById("editdueDate").value;
+        const priority = document.getElementById("editPriority").value;
+
+        viewTitle.innerHTML = title;
+        viewDesc.innerHTML = desc;
+        viewDate.innerHTML = dueDate;
+        viewPriority.innerHTML = priority;
+    }
+
     const deleteTodo = (e) => {
         const index = Number(e.target.id.slice(10));
         todoItemsArr.splice(index, 1);
     }
-
 
     const resetFormField = (field) => {
         field.value = "";
