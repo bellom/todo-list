@@ -13,7 +13,7 @@ const projectContentDom = () => {
                                     <form name="myForm">
                                         <input class="form-control mr-sm-2 mb-2" placeholder="Enter project name" id="projectName" required>
                                         <div role="group">
-                                            <button id="addProjectBtn" class="btn btn-sm btn-primary my-2 my-sm-0">Add Project</button>
+                                            <button type="button" id="addProjectBtn" class="btn btn-sm btn-primary my-2 my-sm-0">Add Project</button>
                                             <button type="button" id="closeProjectForm" class="btn btn-sm btn-danger my-2 my-sm-0">Cancel</button>
                                         </div>                                        
                                     </form>

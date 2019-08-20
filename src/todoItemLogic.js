@@ -5,53 +5,44 @@ import deleteProject from "./projectLogic";
 
 const todoItemLogic = (() => {
     const todoItemsArr = [];
+
     const btnClick = () => {
         document.addEventListener("click", function(e){
             if (e.target.id === "addTodoBtn") {
                 add();
-            } else if (e.target.id.substring(0, 7) === "delTodo") {
-                deleteProject(e);
-                display();                
             } else if (e.target.id === "showTodoFormBtn") {
-                const title = document.getElementById("title");
-                const description = document.getElementById("description");
-                const dueDate = document.getElementById("dueDate");
-                
-                resetFormField(title);
-                resetFormField(description);
-                resetFormField(dueDate);
-                document.getElementById("addTodoForm").style.display = "block"; 
+                showTodoForm();
             } else if (e.target.id === "closeTodoForm") {
                 document.getElementById("addTodoForm").style.display = "none";                
             } else if (e.target.id.substring(0,11) === "todoDetails"){
                 const todoDetails = document.getElementById(e.target.id);
                 const index = e.target.id.slice(11);
                 todoDetails.innerHTML = `<div>
-                                            <h6 class="col my-auto font-weight-bold viewTitle" id="viewTitle">${todoItemsArr[index].title}</h6>
-                                            <p class="col-5 my-auto"><strong>Date: </strong><i class="viewDate">${todoItemsArr[index].dueDate}</i></p>
-                                            <p class="col-5 my-auto"><strong>Description:</strong> <i class="viewDesc">${todoItemsArr[index].description}</i></p>
-                                            <p class="col-5 my-auto"><strong>Priority Status:</strong><i class="viewPriority">${todoItemsArr[index].priority}</i></p>
+                                            <h6 class="col my-auto font-weight-bold viewTitle" id="viewTitle">${getData()[index].title}</h6>
+                                            <p class="col-5 my-auto"><strong>Date: </strong><i class="viewDate">${getData()[index].dueDate}</i></p>
+                                            <p class="col-5 my-auto"><strong>Description:</strong> <i class="viewDesc">${getData()[index].description}</i></p>
+                                            <p class="col-5 my-auto"><strong>Priority Status:</strong><i class="viewPriority">${getData()[index].priority}</i></p>
                                             <span class="btn btn-sm btn-danger text-white ml-3" id="removeTodo${index}">Delete</span>
                                             <span class="btn btn-sm btn-primary text-white" id="editTodo${index}">Edit</span>
                                             <div class="form-inline my-2 my-lg-0 ml-3" id="addEditForm">
                                                 <form>
-                                                    <input class="form-control mr-sm-2 mb-2 mt-3" value="${todoItemsArr[index].title}" id="editTitle" required>
-                                                    <input class="form-control mr-sm-2 mb-2 mt-3" value="${todoItemsArr[index].description}" id="editDesc" required>
-                                                    <input class="form-control mr-sm-2 mb-2" id="editdueDate" value="${todoItemsArr[index].dueDate}" type="date" required>
-                                                    <select class="custom-select mr-sm-2 mb-2" id="editPriority" value="${todoItemsArr[index].priority}" required>
+                                                    <input class="form-control mr-sm-2 mb-2 mt-3" value="${getData()[index].title}" id="editTitle" required>
+                                                    <input class="form-control mr-sm-2 mb-2 mt-3" value="${getData()[index].description}" id="editDesc" required>
+                                                    <input class="form-control mr-sm-2 mb-2" id="editdueDate" value="${getData()[index].dueDate}" type="date" required>
+                                                    <select class="custom-select mr-sm-2 mb-2" id="editPriority" value="${getData()[index].priority}" required>
                                                         <option>Choose Priority</option>
                                                         <option value="Low">Low</option>
                                                         <option value="Medium">Medium</option>
                                                         <option value="High">High</option>
                                                     </select>
                                                     <div role="group">                                    
-                                                        <button id="saveEditForm" class="btn btn-sm btn-primary mb-2">Save</button>
+                                                        <button type="button" id="saveEditForm" class="btn btn-sm btn-primary mb-2">Save</button>
                                                         <button type="button" id="closeEditForm" class="btn btn-sm btn-danger mb-2">Cancel</button>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>`;
-            hideEditForm();
+                hideEditForm();
             } else if (e.target.id.substring(0,10) === "removeTodo"){
                 deleteTodo(e);
                 display();
@@ -66,6 +57,17 @@ const todoItemLogic = (() => {
         })
     }
 
+    const showTodoForm = () => {
+        const title = document.getElementById("title");
+        const description = document.getElementById("description");
+        const dueDate = document.getElementById("dueDate");
+        
+        resetFormField(title);
+        resetFormField(description);
+        resetFormField(dueDate);
+        document.getElementById("addTodoForm").style.display = "block";
+    }
+
     const add = () => {
         const title = document.getElementById("title");
         const description = document.getElementById("description");
@@ -75,6 +77,7 @@ const todoItemLogic = (() => {
 
         if (title.value != "" && description.value != "" && dueDate.value != "" && priority.value != "" && selectProjects.value != "") {
             todoItemsArr.push(todoItem(title.value, description.value, dueDate.value, priority.value, selectProjects.value));
+            setData(todoItemsArr);
             display();
             showProjectHeader();
             document.getElementById("addTodoForm").style.display = "none";
@@ -107,7 +110,7 @@ const todoItemLogic = (() => {
         field.value = "";
     }
 
-    const showProjectHeader = (e) => {
+    const showProjectHeader = () => {
         const todoListHeader = document.getElementById("todoListHeader");
         todoListHeader.innerText = "All Todos";
     }
@@ -115,7 +118,7 @@ const todoItemLogic = (() => {
     const display = () => {
         const todoList = document.getElementById("todoList");
         reset();
-        todoItemsArr.forEach((project, index) => {
+        getData().forEach((project, index) => {
             todoList.innerHTML +=   `<a type="button" id="todoDetails${index}" class="row py-4 btn-light mb-2 d-flex justify-content-between">
                                         <h6 class="col my-auto font-weight-bold" id="show${project.title}">${project.title}</h6>
                                         <p class="col-5 my-auto">Date: ${project.dueDate}</p>
@@ -134,6 +137,14 @@ const todoItemLogic = (() => {
         });
     }
 
+    const getData = () => {
+        return JSON.parse(localStorage.getItem('todoItemsArr'));
+    };
+      
+    const setData = (data) => {
+        localStorage.setItem('todoItemsArr', JSON.stringify(data));
+    };
+
     const reset = () => {
         todoList.innerHTML = "";
     }
@@ -142,7 +153,7 @@ const todoItemLogic = (() => {
         document.getElementById("addEditForm").style.display = "none";
     }
 
-    return { todoItemsArr, btnClick, showProjectOwnedTodo }
+    return { todoItemsArr, btnClick, showProjectOwnedTodo, display }
 })();
 
 export default todoItemLogic;

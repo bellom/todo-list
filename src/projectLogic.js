@@ -2,8 +2,9 @@ import project from "./project";
 import selectProjectsDisplay from "./selectProject";
 import todoItemLogic from "./todoItemLogic";
 
+
 const projectLogic = (() => {
-    const projectsArr = [project("Default")];
+    const projectsArr = [];
 
     const btnClick = () => {
         document.addEventListener("click", function(e){
@@ -38,6 +39,7 @@ const projectLogic = (() => {
     const deleteProject = (e) => {
         const index = Number(e.target.id.slice(10));
         projectsArr.splice(index, 1);
+        setData(projectsArr);
     }
 
     const add = () => {
@@ -73,13 +75,13 @@ const projectLogic = (() => {
 
     const getData = () => {
         return JSON.parse(localStorage.getItem('projectsArr'));
-      };
+    };
       
     const setData = (data) => {
-    localStorage.setItem('projectsArr', JSON.stringify(data));
+        localStorage.setItem('projectsArr', JSON.stringify(data));
     };
 
-    return { btnClick, display, projectsArr}
+    return { btnClick, display, projectsArr, getData }
 })();
 
 export default projectLogic;
