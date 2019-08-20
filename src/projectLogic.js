@@ -59,7 +59,7 @@ const projectLogic = (() => {
     const display = () => {
         const projectList = document.getElementById("projectList");
         reset();
-        projectsArr.forEach((project, index) => {
+        getData().forEach((project, index) => {
             projectList.innerHTML +=   `<a class="d-flex justify-content-between my-1 text-decoration-none" href="#">
                                             <span class="my-auto" id="showProject${project.name}">${project.name}</span>
                                             <span class="btn btn-sm btn-danger text-white" id="delProject${index}">Delete</span>
@@ -75,9 +75,9 @@ const projectLogic = (() => {
         return JSON.parse(localStorage.getItem('projectsArr'));
       };
       
-      const setData = (data) => {
-        localStorage.setItem('projectsArr', JSON.stringify(data));
-      };
+    const setData = (data) => {
+    localStorage.setItem('projectsArr', JSON.stringify(data));
+    };
 
     return { btnClick, display, projectsArr}
 })();
