@@ -28,9 +28,9 @@ const todoItemLogic = (() => {
                 const index = e.target.id.slice(11);
                 todoDetails.innerHTML = `<div>
                                             <h6 class="col my-auto font-weight-bold viewTitle" id="viewTitle">${todoItemsArr[index].title}</h6>
-                                            <p class="col-5 my-auto viewDate"><strong>Date: </strong>${todoItemsArr[index].dueDate}</p>
-                                            <p class="col-5 my-auto viewDesc"><strong>Description:</strong> ${todoItemsArr[index].description}</p>
-                                            <p class="col-5 my-auto viewPriority"><strong>Priority Status:</strong> ${todoItemsArr[index].priority}</p>
+                                            <p class="col-5 my-auto"><strong>Date: </strong><i class="viewDate">${todoItemsArr[index].dueDate}</i></p>
+                                            <p class="col-5 my-auto"><strong>Description:</strong> <i class="viewDesc">${todoItemsArr[index].description}</i></p>
+                                            <p class="col-5 my-auto"><strong>Priority Status:</strong><i class="viewPriority">${todoItemsArr[index].priority}</i></p>
                                             <span class="btn btn-sm btn-danger text-white ml-3" id="removeTodo${index}">Delete</span>
                                             <span class="btn btn-sm btn-primary text-white" id="editTodo${index}">Edit</span>
                                             <div class="form-inline my-2 my-lg-0 ml-3" id="addEditForm">
@@ -51,7 +51,7 @@ const todoItemLogic = (() => {
                                                 </form>
                                             </div>
                                         </div>`;
-            document.getElementById("addEditForm").style.display = "none";
+            hideEditForm();
             } else if (e.target.id.substring(0,10) === "removeTodo"){
                 deleteTodo(e);
                 display();
@@ -59,8 +59,9 @@ const todoItemLogic = (() => {
                 document.getElementById("addEditForm").style.display = "block";
             } else if (e.target.id === "saveEditForm"){
                 editTodo();
+                hideEditForm();
             } else if (e.target.id === "closeEditForm"){
-                document.getElementById("addEditForm").style.display = "none";
+                hideEditForm();
             }
         })
     }
@@ -135,6 +136,10 @@ const todoItemLogic = (() => {
 
     const reset = () => {
         todoList.innerHTML = "";
+    }
+
+    const hideEditForm = () => {
+        document.getElementById("addEditForm").style.display = "none";
     }
 
     return { todoItemsArr, btnClick, showProjectOwnedTodo }

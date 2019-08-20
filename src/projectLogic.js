@@ -45,6 +45,8 @@ const projectLogic = (() => {
 
         if (projectName.value != "" && projectName.value != " ") {
             projectsArr.push(project(projectName.value));
+            // set localStorage.
+            setData(projectsArr);
             display();
             selectProjectsDisplay();
             document.getElementById("addProjectForm").style.display = "none";
@@ -69,6 +71,14 @@ const projectLogic = (() => {
     const reset = () => {
         projectList.innerHTML = "";
     }
+
+    const getData = () => {
+        return JSON.parse(localStorage.getItem('projectsArr'));
+      };
+      
+      const setData = (data) => {
+        localStorage.setItem('projectsArr', JSON.stringify(data));
+      };
 
     return { btnClick, display, projectsArr}
 })();
