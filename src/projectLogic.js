@@ -45,7 +45,6 @@ const projectLogic = (() => {
 
         if (projectName.value != "" && projectName.value != " ") {
             projectsArr.push(project(projectName.value));
-            // set localStorage.
             setData(projectsArr);
             display();
             selectProjectsDisplay();
