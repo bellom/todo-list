@@ -159,7 +159,7 @@ const todoItemLogic = (() => {
         hideFullTodo(index);
     }
     const getData = () => {
-        return JSON.parse(localStorage.getItem('todoItemsArr'));
+        return JSON.parse(localStorage.getItem('todoItemsArr') || "[]");
     };
       
     const setData = (data) => {

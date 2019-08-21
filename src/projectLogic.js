@@ -80,7 +80,7 @@ const projectLogic = (() => {
     }
 
     const getData = () => {
-        return JSON.parse(localStorage.getItem('projectsArr'));
+        return JSON.parse(localStorage.getItem('projectsArr') || "[]");
     };
       
     const setData = (data) => {
