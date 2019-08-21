@@ -2,7 +2,8 @@ import projectLogic from "./projectLogic";
 
 const selectProjectsDisplay = () => {
     const selectProjects = document.getElementById("selectProjects");
-    selectProjects.innerHTML = `<option>Choose Project</option>`;
+    selectProjects.innerHTML = `<option>Choose Project</option>
+                                <option value="Default">Default</option>`;
     
     projectLogic.getData().forEach(element => {
         const option = document.createElement("option");
