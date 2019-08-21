@@ -17,39 +17,21 @@ const todoItemLogic = (() => {
                 document.getElementById("addTodoForm").style.display = "none";                
             } else if (e.target.id.substring(0,11) === "todoDetails"){
                 toggleFullTodo(e);
-
-                
-
-                // todoDetails.innerHTML = `<div>
-                //                             <div class="form-inline my-2 my-lg-0 ml-3" id="addEditForm">
-                //                                 <form>
-                //                                     <input class="form-control mr-sm-2 mb-2 mt-3" value="${getData()[index].title}" id="editTitle" required>
-                //                                     <input class="form-control mr-sm-2 mb-2 mt-3" value="${getData()[index].description}" id="editDesc" required>
-                //                                     <input class="form-control mr-sm-2 mb-2" id="editdueDate" value="${getData()[index].dueDate}" type="date" required>
-                //                                     <select class="custom-select mr-sm-2 mb-2" id="editPriority" value="${getData()[index].priority}" required>
-                //                                         <option>Choose Priority</option>
-                //                                         <option value="Low">Low</option>
-                //                                         <option value="Medium">Medium</option>
-                //                                         <option value="High">High</option>
-                //                                     </select>
-                //                                     <div role="group">                                    
-                //                                         <button type="button" id="saveEditForm" class="btn btn-sm btn-primary mb-2">Save</button>
-                //                                         <button type="button" id="closeEditForm" class="btn btn-sm btn-danger mb-2">Cancel</button>
-                //                                     </div>
-                //                                 </form>
-                //                             </div>
-                //                         </div>`;
-                // hideEditForm();
             } else if (e.target.id.substring(0,10) === "removeTodo"){
                 deleteTodo(e);
                 display();
             } else if (e.target.id.substring(0,8) === "editTodo"){
                 document.getElementById("addEditForm").style.display = "block";
-            } else if (e.target.id === "saveEditForm"){
-                editTodo();
+            } else if (e.target.id.substring(0,12) === "saveEditForm"){
+                const index = e.target.id.slice(12);
+                
+                editTodo(index);
                 hideEditForm();
             } else if (e.target.id === "closeEditForm"){
                 hideEditForm();
+            } else if (e.target.id.substring(0,9) === "closeTodo") {
+                const index = e.target.id.slice(9);                
+                document.getElementById(`fullTodo${index}`).style.display = "none";
             }
         })
     }
@@ -92,21 +74,14 @@ const todoItemLogic = (() => {
         }        
     }
 
-    const editTodo = () => {
-        const viewTitle = document.querySelector(".viewTitle");
-        const viewDesc = document.querySelector(".viewDesc");
-        const viewDate = document.querySelector(".viewDate");
-        const viewPriority = document.querySelector(".viewPriority");
-
+    const editTodo = (index) => {
         const title = document.getElementById("editTitle").value;
         const desc = document.getElementById("editDesc").value;
         const dueDate = document.getElementById("editdueDate").value;
         const priority = document.getElementById("editPriority").value;
 
-        viewTitle.innerHTML = title;
-        viewDesc.innerHTML = desc;
-        viewDate.innerHTML = dueDate;
-        viewPriority.innerHTML = priority;
+        getData()[index].title = title;
+        setData(getData());
     }
 
     const deleteTodo = (e) => {
@@ -125,7 +100,6 @@ const todoItemLogic = (() => {
     }
 
     const display = () => {
-        const todoList = document.getElementById("todoList");
         reset();
         getData().forEach((project, index) => {
             showTodoList(project, index);
@@ -145,18 +119,35 @@ const todoItemLogic = (() => {
 
     const showTodoList = (project, index) => {
         todoList.innerHTML +=   `<div id="todoDetails${index}" class="mb-4 p-4 btn-light border">
-                                    <div class="row d-flex justify-content-between">
-                                        <h5 class="col my-auto font-weight-bold">${project.title}</h5>
-                                        <p class="col text-right my-auto">Date: ${project.dueDate}</p>
-                                    </div>
-                                    <div id="fullTodo${index}" class="text-muted">
-                                        <p class="mb-0"><strong>Description: </strong><i class="viewDesc">${getData()[index].description}</i></p>
-                                        <p><strong>Priority Status: </strong><i class="viewPriority">${getData()[index].priority}</i></p>
-                                        <span class="btn btn-sm btn-danger text-white" id="removeTodo${index}">Delete</span>
+                                    <span class="my-auto font-weight-bold">${project.title}</span>
+                                    <span class="float-right my-auto">Date: ${project.dueDate}</span>
+                                    <span id="fullTodo${index}" class="text-muted">
+                                        <p class="mb-0"><strong>Description: </strong><i>${getData()[index].description}</i></p>
+                                        <p><strong>Priority Status: </strong><i>${getData()[index].priority}</i></p>
                                         <span class="btn btn-sm btn-primary text-white" id="editTodo${index}">Edit</span>
+                                        <span class="btn btn-sm btn-danger text-white" id="removeTodo${index}">Delete</span>
+                                        <span class="btn btn-sm btn-danger text-white" id="closeTodo${index}">Close</span>
+                                    </span>
+                                    <div class="form-inline my-2 my-lg-0 ml-3" id="addEditForm">
+                                        <form>
+                                            <input class="form-control mr-sm-2 mb-2 mt-3" value="${getData()[index].title}" id="editTitle" required>
+                                            <input class="form-control mr-sm-2 mb-2 mt-3" value="${getData()[index].description}" id="editDesc" required>
+                                            <input class="form-control mr-sm-2 mb-2" id="editdueDate" value="${getData()[index].dueDate}" type="date" required>
+                                            <select class="custom-select mr-sm-2 mb-2" id="editPriority" value="${getData()[index].priority}" required>
+                                                <option>Choose Priority</option>
+                                                <option value="Low">Low</option>
+                                                <option value="Medium">Medium</option>
+                                                <option value="High">High</option>
+                                            </select>
+                                            <div role="group">                                    
+                                                <button type="button" id="saveEditForm${index}" class="btn btn-sm btn-primary mb-2">Save</button>
+                                                <button type="button" id="closeEditForm" class="btn btn-sm btn-danger mb-2">Cancel</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>`;
         hideFullTodo(index);
+        hideEditForm();
     }
     const getData = () => {
         return JSON.parse(localStorage.getItem('todoItemsArr') || "[]");
