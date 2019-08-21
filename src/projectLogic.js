@@ -28,7 +28,7 @@ const projectLogic = (() => {
     }
 
     const filterProjectTodos = (e) => {
-        return todoItemLogic.todoItemsArr.filter((todo) => todo.projectOwn === `${e.target.id.slice(11)}`);
+        return todoItemLogic.getData().filter((todo) => todo.projectOwn === `${e.target.id.slice(11)}`);
     }
 
     const showProjectHeader = (e) => {
@@ -60,13 +60,19 @@ const projectLogic = (() => {
 
     const display = () => {
         const projectList = document.getElementById("projectList");
-        reset();
+        showDefault(projectList);
         getData().forEach((project, index) => {
             projectList.innerHTML +=   `<a class="d-flex justify-content-between my-1 text-decoration-none" href="#">
                                             <span class="my-auto" id="showProject${project.name}">${project.name}</span>
-                                            <span class="btn btn-sm btn-danger text-white" id="delProject${index}">Delete</span>
-                                        </a>`
+                                            <span type="button" class="btn btn-sm btn-danger text-white" id="delProject${index}">Delete</span>
+                                        </a>`;
         });
+    }
+
+    const showDefault = (projectList) => {
+        projectList.innerHTML = `<a class="d-flex justify-content-between my-1 text-decoration-none" href="#">
+                                    <span class="my-auto" id="showProjectDefault">Default</span>
+                                </a>`
     }
 
     const reset = () => {
