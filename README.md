@@ -13,7 +13,7 @@ Todolist project from Odin-Project, the web app keep track of user's todo-list.
 ## Technologies
 
 - HTML
-- CSS
+- Bootstrap
 - JavaScript
 - Webpack
 
