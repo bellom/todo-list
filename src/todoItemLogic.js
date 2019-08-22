@@ -32,8 +32,9 @@ const todoItemLogic = (() => {
                 const index = e.target.id.slice(12);
                 editTodo(index);
                 hideEditForm(index);
-            } else if (e.target.id === "closeEditForm"){
-                hideEditForm();
+            } else if (e.target.id.substring(0,13) === "closeEditForm"){
+                const index = e.target.id.slice(13);
+                hideEditForm(index);
             } else if (e.target.id.substring(0,9) === "closeTodo") {
                 const index = e.target.id.slice(9);                
                 document.getElementById(`fullTodo${index}`).style.display = "none";
@@ -154,7 +155,7 @@ const todoItemLogic = (() => {
                                             </select>
                                             <div role="group">                                    
                                             <button id="saveEditForm${index}" class="btn btn-sm btn-primary mb-2">Save</button>
-                                            <button id="closeEditForm" class="btn btn-sm btn-danger mb-2">Cancel</button>
+                                            <button id="closeEditForm${index}" class="btn btn-sm btn-danger mb-2">Cancel</button>
                                             </div>
                                         </form>
                                     </div>
