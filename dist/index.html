@@ -9,74 +9,15 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="css/main.css"> -->
 </head>
-<body>
-    <h1 class="text-center">My Todo List</h1>
-
-    <div class="container" id="content">
-        <div class="row">
-            <div class="projects col-4 bg-primary text-white">
-                <h4>Projects</h4><span></span>
-
-                <div class="add-project-form" id="addProjectForm">
-                    <input id="projectName" type="text" placeholder="Name">
-                    <button class="add-project-btn" id="addProjectBtn" type="submit">Add Project</button>
-                </div>
-                
-                <div class="project-list">
-                    <ul id="projectList">
-                        <li>Default</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="todos col-8 bg-secondary text-white">
-                <h4>Todos</h4>
-
-                <div class="add-project-form" id="addProjectForm">
-                    <input id="title" type="text" placeholder="Title">
-                    <input id="description" type="text" placeholder="Description" required>
-                    <input id="dueDate" type="date"><br>
-                    <select id="priority">
-                        <option value="" disabled selected>Priority</option>
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
-                    </select>
-                    <input id="project" type="text" placeholder="Project" required>
-                    <button class="add-todo-btn" id="addTodoBtn" type="submit">Add Todo</button>
-                </div>
-
-                <div class="todo-list">
-                    <ul id="todoList"></ul>
-                </div>
-
-                <div class="row">
-                    <span class="col">Title</span>
-                    <span class="col">Description</span>
-                    <span class="col">Due Date</span>
-                    <span class="col">Priority</span>
-                </div>
-
-            </div>
+<body>    
+    <nav class="navbar navbar-expand-lg bg-primary px-md-5" id="nav"></nav>
+    <div class="container">
+        <div class="row mx-1 bg-light my-xs-3">
+            <div class="col-sm-12 col-md-4 border p-4" id="projectContent"></div>
+            <div class="col-sm-12 col-md-8 border p-4" id="todoContent"></div>
         </div>
-        
-     
     </div>
 
-
-
-    
     <script src="main.js"></script>
 </body>
 </html>
-
-
-<!-- 1. page.js (display the design with default todolist having four properties: title, description, dueDate and priority)
-
-2. Add.js (this function will be trigger once the user click on add button which will add new item to the list)
-
-3. status.js (this will set todos as complete)
-
-4. priority.js (changing todo priority )
-
-5. delete.js (this function will be trigger once the user click on delete button) -->

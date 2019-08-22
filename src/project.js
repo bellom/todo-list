@@ -1,6 +1,5 @@
-/* global document */
-const project = (name, todos) => {
-    return { name, todos };
+const project = (name) => {
+    return {name};
 }
 
 export default project;

@@ -1,9 +1,7 @@
-// import page from "./page";
-// import defaultPage from "./default-page";
-import addProject from "./addProject";
-import addTodo from "./addTodo";
+import homePage from "./homePage";
+import todoItemLogic from "./todoItemLogic";
+import projectLogic from "./projectLogic";
 
-// defaultPage();
-addProject();
-addTodo();
-// page();
+projectLogic.clickListeners();
+todoItemLogic.clickListeners();
+homePage();
