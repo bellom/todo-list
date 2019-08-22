@@ -80,8 +80,13 @@ const todoItemLogic = (() => {
         const dueDate = document.getElementById("editdueDate").value;
         const priority = document.getElementById("editPriority").value;
 
-        getData()[index].title = title;
-        setData(getData());
+        // todoItemsArr = getData();
+        todoItemsArr[index].title = title;
+        todoItemsArr[index].description = desc;
+        todoItemsArr[index].dueDate = dueDate;
+        todoItemsArr[index].priority = priority;
+        setData(todoItemsArr);
+        display();
     }
 
     const deleteTodo = (e) => {
