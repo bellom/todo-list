@@ -4,9 +4,17 @@ import todoItemLogic from "./todoItemLogic";
 
 
 const projectLogic = (() => {
-    const projectsArr = [];
+    const getData = () => {
+        return JSON.parse(localStorage.getItem('projectsArr') || "[]");
+    };
+      
+    const setData = (data) => {
+        localStorage.setItem('projectsArr', JSON.stringify(data));
+    };
 
-    const btnClick = () => {
+    const projectsArr = getData();
+
+    const clickListeners = () => {
         document.addEventListener("click", function(e){
             if (e.target.id === "addProjectBtn") {
                 add();
@@ -64,7 +72,7 @@ const projectLogic = (() => {
         getData().forEach((project, index) => {
             projectList.innerHTML +=   `<a class="d-flex justify-content-between my-1 text-decoration-none" href="#">
                                             <span class="my-auto" id="showProject${project.name}">${project.name}</span>
-                                            <span type="button" class="btn btn-sm btn-danger text-white" id="delProject${index}">Delete</span>
+                                            <span class="btn btn-sm btn-danger text-white" id="delProject${index}">Delete</span>
                                         </a>`;
         });
     }
@@ -73,21 +81,9 @@ const projectLogic = (() => {
         projectList.innerHTML = `<a class="d-flex justify-content-between my-1 text-decoration-none" href="#">
                                     <span class="my-auto" id="showProjectDefault">Default</span>
                                 </a>`
-    }
+    }    
 
-    const reset = () => {
-        projectList.innerHTML = "";
-    }
-
-    const getData = () => {
-        return JSON.parse(localStorage.getItem('projectsArr') || "[]");
-    };
-      
-    const setData = (data) => {
-        localStorage.setItem('projectsArr', JSON.stringify(data));
-    };
-
-    return { btnClick, display, projectsArr, getData }
+    return { clickListeners, display, projectsArr, getData }
 })();
 
 export default projectLogic;

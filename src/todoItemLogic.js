@@ -1,32 +1,37 @@
 import todoItem from "./todoItem";
-import deleteProject from "./projectLogic";
-
-
 
 const todoItemLogic = (() => {
-    const todoItemsArr = [];
+    const getData = () => {
+        return JSON.parse(localStorage.getItem('todoItemsArr') || "[]");
+    };
+      
+    const setData = (data) => {
+        localStorage.setItem('todoItemsArr', JSON.stringify(data));
+    };
 
-    const btnClick = () => {
+    const todoItemsArr = getData();
+
+    const clickListeners = () => {
         document.addEventListener("click", function(e){
-            e.preventDefault();
             if (e.target.id === "addTodoBtn") {
                 add();
             } else if (e.target.id === "showTodoFormBtn") {
                 showTodoForm();
             } else if (e.target.id === "closeTodoForm") {
-                document.getElementById("addTodoForm").style.display = "none";                
+                document.getElementById("addTodoForm").style.display = "none";            
             } else if (e.target.id.substring(0,11) === "todoDetails"){
                 toggleFullTodo(e);
             } else if (e.target.id.substring(0,10) === "removeTodo"){
                 deleteTodo(e);
                 display();
             } else if (e.target.id.substring(0,8) === "editTodo"){
-                document.getElementById("addEditForm").style.display = "block";
+                const index = e.target.id.slice(8);
+                hideFullTodo(index);
+                showEditTodoForm(index);
             } else if (e.target.id.substring(0,12) === "saveEditForm"){
                 const index = e.target.id.slice(12);
-                
                 editTodo(index);
-                hideEditForm();
+                hideEditForm(index);
             } else if (e.target.id === "closeEditForm"){
                 hideEditForm();
             } else if (e.target.id.substring(0,9) === "closeTodo") {
@@ -34,6 +39,10 @@ const todoItemLogic = (() => {
                 document.getElementById(`fullTodo${index}`).style.display = "none";
             }
         })
+    }
+
+    const showEditTodoForm = (index) => {
+        document.getElementById(`addEditForm${index}`).style.display = "block";
     }
 
     const toggleFullTodo = (e) => {
@@ -80,7 +89,6 @@ const todoItemLogic = (() => {
         const dueDate = document.getElementById("editdueDate").value;
         const priority = document.getElementById("editPriority").value;
 
-        // todoItemsArr = getData();
         todoItemsArr[index].title = title;
         todoItemsArr[index].description = desc;
         todoItemsArr[index].dueDate = dueDate;
@@ -133,8 +141,8 @@ const todoItemLogic = (() => {
                                         <span class="btn btn-sm btn-danger text-white" id="removeTodo${index}">Delete</span>
                                         <span class="btn btn-sm btn-danger text-white" id="closeTodo${index}">Close</span>
                                     </span>
-                                    <div class="form-inline my-2 my-lg-0 ml-3" id="addEditForm">
-                                        <form>
+                                    <div class="form-inline my-2 my-lg-0 mx-2" id="addEditForm${index}">
+                                        <form onsubmit="return false">
                                             <input class="form-control mr-sm-2 mb-2 mt-3" value="${getData()[index].title}" id="editTitle" required>
                                             <input class="form-control mr-sm-2 mb-2 mt-3" value="${getData()[index].description}" id="editDesc" required>
                                             <input class="form-control mr-sm-2 mb-2" id="editdueDate" value="${getData()[index].dueDate}" type="date" required>
@@ -145,32 +153,25 @@ const todoItemLogic = (() => {
                                                 <option value="High">High</option>
                                             </select>
                                             <div role="group">                                    
-                                                <button type="button" id="saveEditForm${index}" class="btn btn-sm btn-primary mb-2">Save</button>
-                                                <button type="button" id="closeEditForm" class="btn btn-sm btn-danger mb-2">Cancel</button>
+                                            <button id="saveEditForm${index}" class="btn btn-sm btn-primary mb-2">Save</button>
+                                            <button id="closeEditForm" class="btn btn-sm btn-danger mb-2">Cancel</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>`;
         hideFullTodo(index);
-        hideEditForm();
+        hideEditForm(index);
     }
-    const getData = () => {
-        return JSON.parse(localStorage.getItem('todoItemsArr') || "[]");
-    };
-      
-    const setData = (data) => {
-        localStorage.setItem('todoItemsArr', JSON.stringify(data));
-    };
 
     const reset = () => {
         todoList.innerHTML = "";
     }
 
-    const hideEditForm = () => {
-        document.getElementById("addEditForm").style.display = "none";
+    const hideEditForm = (index) => {
+        document.getElementById(`addEditForm${index}`).style.display = "none";
     }
 
-    return { todoItemsArr, btnClick, showProjectOwnedTodo, display, getData }
+    return { todoItemsArr, clickListeners, showProjectOwnedTodo, display, getData }
 })();
 
 export default todoItemLogic;
