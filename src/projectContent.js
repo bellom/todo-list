@@ -1,4 +1,4 @@
-
+/* global document */
 const projectContentDom = () => {
     const projectContent = document.getElementById("projectContent");
 
