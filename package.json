@@ -1,14 +1,20 @@
 {
   "name": "todo-list",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Todolist project from Odin-Project, the web app keep track of user's todo-list.",
+  "private": true,
   "dependencies": {
-    "lodash": "^4.17.15"
+    "yargs": "^14.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --watch",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -20,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/bellom/todo-list/issues"
   },
-  "homepage": "https://github.com/bellom/todo-list#readme"
+  "homepage": "https://github.com/bellom/todo-list#readme",
+  "main": "webpack.config.js"
 }
