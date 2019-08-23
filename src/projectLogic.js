@@ -1,7 +1,7 @@
 /* global document, localStorage */
 
 import project from "./project";
-import selectProjectsDisplay from "./selectProject";
+import { selectProjectsDisplay } from "./selectProject";
 import todoItemLogic from "./todoItemLogic";
 
 
