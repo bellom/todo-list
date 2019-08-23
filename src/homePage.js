@@ -1,4 +1,3 @@
-/* global document */
 
 import navbar from "./navbar";
 import projectLogic from "./projectLogic"

@@ -1,4 +1,4 @@
-/* global document */
+/* global document, localStorage */
 
 import project from "./project";
 import selectProjectsDisplay from "./selectProject";

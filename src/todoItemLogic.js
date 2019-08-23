@@ -1,4 +1,4 @@
-/* global document */
+/* global localStorage */
 
 import todoItem from "./todoItem";
 
@@ -134,6 +134,7 @@ const todoItemLogic = (() => {
     }
 
     const showTodoList = (project, index) => {
+        const todoList = document.getElementById("todoList");
         todoList.innerHTML +=   `<div id="todoDetails${index}" class="mb-4 p-4 btn-light border">
                                     <span class="my-auto font-weight-bold">${project.title}</span>
                                     <span class="float-right my-auto">Date: ${project.dueDate}</span>
@@ -167,6 +168,7 @@ const todoItemLogic = (() => {
     }
 
     const reset = () => {
+        const todoList = document.getElementById("todoList");
         todoList.innerHTML = "";
     }
 

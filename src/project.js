@@ -1,4 +1,3 @@
-/* global document */
 
 const project = (name) => {
     return {name};

@@ -1,7 +1,5 @@
 /* global document */
 
-import projectLogic from "./projectLogic";
-
 const projectContentDom = () => {
     const projectContent = document.getElementById("projectContent");
 
