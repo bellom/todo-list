@@ -1,6 +1,6 @@
 /* global document */
 
-// file selectProjectsDisplay.ts
+// file a.ts
 import projectLogic from "./projectLogic";
 
 const selectProjectsDisplay = () => {
