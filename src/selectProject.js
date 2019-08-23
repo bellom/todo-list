@@ -1,6 +1,6 @@
 /* global document */
 
-import { projectLogic } from "./projectLogic";
+import projectLogic from "./projectLogic";
 
 const selectProjectsDisplay = () => {
     const selectProjects = document.getElementById("selectProjects");

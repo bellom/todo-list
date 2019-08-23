@@ -1,6 +1,6 @@
-/* global document, localStorage */
+/* global document */
 
-import { project } from "./project";
+import project from "./project";
 import { selectProjectsDisplay } from "./selectProject";
 import todoItemLogic from "./todoItemLogic";
 
