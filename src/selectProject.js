@@ -1,5 +1,4 @@
 /* global document */
-// file selectProjectsDisplay.ts
 
 import projectLogic from "./projectLogic";
 
