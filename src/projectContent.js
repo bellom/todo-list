@@ -1,4 +1,4 @@
-/* eslint-env browser */
+
 const projectContentDom = () => {
     const projectContent = document.getElementById("projectContent");
 

@@ -1,4 +1,4 @@
-/* eslint-env browser */
+
 const path = require('path');
 
 module.exports = {

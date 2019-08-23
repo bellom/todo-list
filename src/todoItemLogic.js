@@ -1,4 +1,4 @@
-/* eslint-env browser */
+
 import todoItem from "./todoItem";
 
 const todoItemLogic = (() => {
