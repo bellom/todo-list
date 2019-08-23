@@ -1,7 +1,6 @@
 /* global document, localStorage */
-// file projectLogic.ts
 
-import project from "./project";
+import { project } from "./project";
 import { selectProjectsDisplay } from "./selectProject";
 import todoItemLogic from "./todoItemLogic";
 
