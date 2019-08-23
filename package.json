@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Todolist project from Odin-Project, the web app keep track of user's todo-list.",
   "private": true,
-  "dependencies": {
-    "yargs": "^14.0.0"
-  },
   "devDependencies": {
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.7",
