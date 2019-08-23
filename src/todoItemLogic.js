@@ -54,7 +54,7 @@ const todoItemLogic = (() => {
 
         if (fullTodo.style.display === "none") {
             fullTodo.style.display = "block";
-        } else if (fullTodo.style.display = "block") {
+        } else if (fullTodo.style.display === "block") {
             fullTodo.style.display = "none";
         }
     }
