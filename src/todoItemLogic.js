@@ -157,8 +157,8 @@ const todoItemLogic = (() => {
                                                 <option value="High">High</option>
                                             </select>
                                             <div role="group">                                    
-                                            <button id="saveEditForm${index}" class="btn btn-sm btn-primary mb-2">Save</button>
-                                            <button id="closeEditForm${index}" class="btn btn-sm btn-danger mb-2">Cancel</button>
+                                            <button type="button" id="saveEditForm${index}" class="btn btn-sm btn-primary mb-2">Save</button>
+                                            <button type="button" id="closeEditForm${index}" class="btn btn-sm btn-danger mb-2">Cancel</button>
                                             </div>
                                         </form>
                                     </div>

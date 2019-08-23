@@ -28,6 +28,7 @@ const projectLogic = (() => {
                 resetFormField(projectName);
                 document.getElementById("addProjectForm").style.display = "block";
             } else if (e.target.id === "closeProjectForm") {
+                document.getElementById("projectName").value = " ";
                 document.getElementById("addProjectForm").style.display = "none";
             } else if (e.target.id.substring(0, 11) === "showProject") {
                 showProjectHeader(e);
