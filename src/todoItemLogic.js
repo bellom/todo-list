@@ -1,4 +1,4 @@
-/* global localStorage */
+/* global document, localStorage */
 
 import todoItem from "./todoItem";
 
