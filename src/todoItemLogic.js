@@ -1,4 +1,5 @@
 /* global document */
+
 import todoItem from "./todoItem";
 
 const todoItemLogic = (() => {

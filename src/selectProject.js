@@ -1,3 +1,5 @@
+/* global document */
+
 import projectLogic from "./projectLogic";
 
 const selectProjectsDisplay = () => {
