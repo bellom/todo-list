@@ -10,7 +10,7 @@ const homePage = () => {
     navbar();
     projectContentDom();
     todoContentDom();
-    selectProjectsDisplay();
+    projectLogic.selectProjectsDisplay();
     projectLogic.display();
     todoItemLogic.display();
 }

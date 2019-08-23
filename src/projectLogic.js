@@ -1,8 +1,6 @@
 /* global document, localStorage */
 
-// file a.ts
 import project from "./project";
-import { selectProjectsDisplay } from "./selectProject";
 import todoItemLogic from "./todoItemLogic";
 
 
@@ -86,7 +84,20 @@ const projectLogic = (() => {
                                 </a>`
     }    
 
-    return { clickListeners, display, projectsArr, getData }
+    const selectProjectsDisplay = () => {
+        const selectProjects = document.getElementById("selectProjects");
+        selectProjects.innerHTML = `<option>Choose Project</option>
+                                    <option value="Default">Default</option>`;
+        
+        projectLogic.getData().forEach(element => {
+            const option = document.createElement("option");
+            option.setAttribute("value", `${element.name}`);
+            option.innerText = `${element.name}`;
+            selectProjects.appendChild(option);
+        });
+    }
+
+    return { clickListeners, display, projectsArr, getData, selectProjectsDisplay }
 })();
 
 export default projectLogic;
