@@ -1,3 +1,5 @@
+/* global document */
+
 import homePage from "./homePage";
 import todoItemLogic from "./todoItemLogic";
 import projectLogic from "./projectLogic";

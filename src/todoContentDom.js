@@ -1,3 +1,5 @@
+/* global document */
+
 const todoContentDom = () => {
     const todoContent = document.getElementById("todoContent");
 

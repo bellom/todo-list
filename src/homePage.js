@@ -1,3 +1,5 @@
+/* global document */
+
 import navbar from "./navbar";
 import projectLogic from "./projectLogic"
 import projectContentDom from "./projectContent";
