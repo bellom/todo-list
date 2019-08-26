@@ -8,7 +8,7 @@ const projectLogic = (() => {
     const getData = () => {
         return JSON.parse(localStorage.getItem('projectsArr') || "[]");
     };
-      
+
     const setData = (data) => {
         localStorage.setItem('projectsArr', JSON.stringify(data));
     };
@@ -16,12 +16,12 @@ const projectLogic = (() => {
     const projectsArr = getData();
 
     const clickListeners = () => {
-        document.addEventListener("click", function(e){
+        document.addEventListener("click", function (e) {
             if (e.target.id === "addProjectBtn") {
                 add();
             } else if (e.target.id.substring(0, 10) === "delProject") {
                 deleteProject(e);
-                display();                 
+                display();
                 selectProjectsDisplay();
             } else if (e.target.id === "showProjectFormBtn") {
                 const projectName = document.getElementById("projectName");
@@ -61,7 +61,7 @@ const projectLogic = (() => {
             display();
             selectProjectsDisplay();
             document.getElementById("addProjectForm").style.display = "none";
-        }        
+        }
     }
 
     const resetFormField = (field) => {
@@ -72,7 +72,7 @@ const projectLogic = (() => {
         const projectList = document.getElementById("projectList");
         showDefault(projectList);
         getData().forEach((project, index) => {
-            projectList.innerHTML +=   `<a class="d-flex justify-content-between my-1 text-decoration-none" href="#">
+            projectList.innerHTML += `<a class="d-flex justify-content-between my-1 text-decoration-none" href="#">
                                             <span class="my-auto" id="showProject${project.name}">${project.name}</span>
                                             <span class="btn btn-sm btn-danger text-white" id="delProject${index}">Delete</span>
                                         </a>`;
@@ -83,13 +83,13 @@ const projectLogic = (() => {
         projectList.innerHTML = `<a class="d-flex justify-content-between my-1 text-decoration-none" href="#">
                                     <span class="my-auto" id="showProjectDefault">Default</span>
                                 </a>`
-    }    
+    }
 
     const selectProjectsDisplay = () => {
         const selectProjects = document.getElementById("selectProjects");
         selectProjects.innerHTML = `<option>Choose Project</option>
                                     <option value="Default">Default</option>`;
-        
+
         projectLogic.getData().forEach(element => {
             const option = document.createElement("option");
             option.setAttribute("value", `${element.name}`);
@@ -98,7 +98,13 @@ const projectLogic = (() => {
         });
     }
 
-    return { clickListeners, display, projectsArr, getData, selectProjectsDisplay }
+    return {
+        clickListeners,
+        display,
+        projectsArr,
+        getData,
+        selectProjectsDisplay
+    }
 })();
 
 export default projectLogic;
