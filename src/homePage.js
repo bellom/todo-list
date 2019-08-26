@@ -1,14 +1,10 @@
 
-import navbar from "./navbar";
 import projectLogic from "./projectLogic"
-import projectContentDom from "./projectContent";
-import todoContentDom from "./todoContentDom";
 import todoItemLogic from "./todoItemLogic";
+import hideForms from "./hideForms";
 
 const homePage = () => {
-    navbar();
-    projectContentDom();
-    todoContentDom();
+    hideForms();
     projectLogic.selectProjectsDisplay();
     projectLogic.display();
     todoItemLogic.display();
